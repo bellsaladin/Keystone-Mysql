@@ -237,6 +237,7 @@ definePrototypeGetters(Field, {
  */
 Field.prototype.addToSchema = function (schema) {
 	var ops = (this._nativeType) ? _.defaults({ type: this._nativeType }, this.options) : this.options;
+	//@TODO :  fix this support new _dbObj logic (which is going to be a wrapper of mongoose which uses SequelizeJs)
 	schema.path(this.path, ops);
 	this.bindUnderscoreMethods();
 };

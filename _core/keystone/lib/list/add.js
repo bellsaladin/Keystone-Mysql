@@ -38,6 +38,14 @@ function add () {
 		}
 		this.uiElements.push({
 			type: 'field',
+			/*  #######################################################
+			// UNDERSTANDING :  the following function List.prototype.field (lib/list/field.js) is very important 
+			//                                         it's where the adapted field is being created and the approriate fields added to schema based 
+			//                                         on keystone's fieldType.
+						    CHECK : Field.prototype.addToSchema (for each schema)
+			//		     
+			//			   
+			####################################################### */ 
 			field: this.field(path, options),
 		});
 	}.bind(this);
@@ -45,8 +53,15 @@ function add () {
 	var args = Array.prototype.slice.call(arguments);
 	var self = this;
 
+	// ######################################################################################################
+	
+	// Uderstanding : here you can see that all provided model args are being processed into ui Element 
+
+	// ######################################################################################################
+
 	_.forEach(args, function (def) {
 		self.schemaFields.push(def);
+		
 		if (typeof def === 'string') {
 			if (def === '>>>') {
 				self.uiElements.push({

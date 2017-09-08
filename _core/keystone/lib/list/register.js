@@ -6,6 +6,9 @@ var debug = require('debug')('keystone:core:list:register');
 
 
 /**
+ * ##################################
+ * UNDERSTANDING : after the fields were being  added to fields through "lib/list/add.js"
+ * ##################################
  * Registers the Schema with Mongoose, and the List with Keystone
  *
  * Also adds default fields and virtuals to the schema for the list
