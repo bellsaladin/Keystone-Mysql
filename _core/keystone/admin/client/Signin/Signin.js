@@ -15,8 +15,8 @@ import LoginForm from './components/LoginForm';
 var SigninView = React.createClass({
 	getInitialState () {
 		return {
-			email: '',
-			password: '',
+			email: 'user@keystonejs.com',
+			password: 'admin',
 			isAnimating: false,
 			isInvalid: false,
 			invalidMessage: '',
