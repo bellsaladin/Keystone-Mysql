@@ -85,7 +85,12 @@ var Keystone = function () {
 	}
 
 	// init mongoose
-	this.set('mongoose', require('mongoose'));
+	//this.mongoose = require('mongoose');
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	// IMPORTANT : DbObj is a Mongoose wrapper based on SequelizeJS
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	this.mongoose = require('./_dbObj/index.js');
 	this.mongoose.Promise = require('es6-promise').Promise;
 
 	// Attach middleware packages, bound to this instance

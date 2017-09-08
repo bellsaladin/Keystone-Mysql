@@ -30,5 +30,8 @@ node_modules
 # Ignore .DS_Store files on OS X
 .DS_Store
 
+package-lock.json
 _testZone
-**/package-lock.json
+_core/keystone/package-lock.json
+
+_core/keystone/package-lock.json
