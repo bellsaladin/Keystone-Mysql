@@ -67,12 +67,18 @@ module.exports = function openDatabaseConnection (callback) {
 		mongoConnectionOpen = true;
 
 		var connected = function () {
-			if (keystone.get('auto update')) {
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+			// IMPORTANT : only way keystone starts using dbObj instead of mongoose is to disable applyUpdates() call 
+			// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+			/*if (keystone.get('auto update')) {
 				debug('applying auto update');
 				keystone.applyUpdates(callback);
 			} else {
 				callback();
-			}
+			}*/
+
+			callback();
 		};
 
 		if (keystone.sessionStorePromise) {
