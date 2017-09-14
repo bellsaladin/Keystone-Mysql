@@ -15,8 +15,14 @@ var schema = function (arg1, arg2) {
 schema.Types = {};
 schema.Types.ObjectId = Sequelize.INTEGER;
 
-schema.prototype.add = function (path, options) {
+schema.prototype.add = function (args , parentKey) {
 	console.log('dbObj::Schema::add')
+	console.log(args)
+	for (var k in args){
+	    	var opts = args[k];
+	    	var key = (parentKey != null)? parentKey.replace('.','_') + k : k;
+	    	this.path(key, opts);
+	}
 };
 
 schema.prototype.path = function (key, opts) {
@@ -39,7 +45,7 @@ schema.prototype.path = function (key, opts) {
 	};
 
 	if( opts === undefined) return path;
-	if (typeof opts ==='string') opts = {type : opts}; // opts adapter
+	if (typeof opts !='object') opts = {type : opts}; // opts adapter
 
 	this.fields[key] = {type : Utils.transformTypeToSequlizeType(opts.type)   }
 	console.log('this.fields')
