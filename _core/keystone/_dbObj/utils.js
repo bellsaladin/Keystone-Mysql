@@ -22,6 +22,19 @@ function transformTypeToSequlizeType(type){
 	return Sequelize.INTEGER;
 }
 
+function normalizeWhere(array){
+	console.log('DBObj::Utils::normalizeWhere');
+	for (var k in array){
+	    console.log('typeof array[k] ');
+	    console.log(typeof array[k] );
+	    if (typeof array[k] !== 'object') {
+	    	array[k] = array[k].toString();
+	    }
+	}
+	return array;
+}
+
 module.exports = {
-	transformTypeToSequlizeType: transformTypeToSequlizeType
+	transformTypeToSequlizeType: transformTypeToSequlizeType,
+	normalizeWhere: normalizeWhere
 };

@@ -1,5 +1,5 @@
-var sequelizeInstance = require('./common.js').sequelizeInstance;
 const Utils = require('./utils.js');
+var sequelizeInstance = require('./common.js').sequelizeInstance;
 
 const Sequelize = require('sequelize');
 

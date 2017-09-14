@@ -91,6 +91,7 @@ var Keystone = function () {
 	// IMPORTANT : DbObj is a Mongoose wrapper based on SequelizeJS
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	this.mongoose = require('./_dbObj/index.js');
+	
 	this.mongoose.Promise = require('es6-promise').Promise;
 
 	// Attach middleware packages, bound to this instance
