@@ -84,7 +84,8 @@ module.exports = function (keystone) {
 			return this.fields[this.mappings.name];
 		} });
 		Object.defineProperty(this, 'nameIsVirtual', { get: function () {
-			return this.model.schema.virtuals[this.mappings.name] ? true : false;
+			return false;
+			//return this.model.schema.virtuals[this.mappings.name] ? true : false;
 		} });
 		Object.defineProperty(this, 'nameFieldIsFormHeader', { get: function () {
 			return (this.fields[this.mappings.name] && this.fields[this.mappings.name].type === 'text') ? !this.fields[this.mappings.name].noedit : false;

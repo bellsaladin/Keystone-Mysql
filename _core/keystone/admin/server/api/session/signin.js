@@ -10,11 +10,17 @@ function signin (req, res) {
 		return res.status(401).json({ error: 'email and password required' });
 	}
 	var User = keystone.list(keystone.get('user model'));
-	var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
-	User.model.findOne({ email: emailRegExp }).exec(function (err, user) {
+	//var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
+	User.model.findOne({ email: req.body.email.trim() }).exec(function (err, user) {
 		if (user) {
 			keystone.callHook(user, 'pre:signin', req, function (err) {
 				if (err) return res.status(500).json({ error: 'pre:signin error', detail: err });
+				
+				// ####### 	#######	#######	#######	#######	#######
+				// @NOTE : compare function here is called from password Field Type (PasswordType.js)
+				// In mongoose it's possible to define custom types and the functions are automatically bound, something similar should be done with DbObj
+
+
 				user._.password.compare(req.body.password, function (err, isMatch) {
 					if (isMatch) {
 						session.signinWithUser(user, req, res, function () {

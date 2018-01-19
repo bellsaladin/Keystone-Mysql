@@ -39,22 +39,8 @@ var Footer = React.createClass({
 		return (
 			<footer className={css(classes.footer)} data-keystone-footer>
 				<Container>
-					<a
-						href={backUrl}
-						tabIndex="-1"
-						className={css(classes.link)}
-					>
-						{brand + (appversion ? (' ' + appversion) : '')}
-					</a>
 					<span> by </span>
-					<a
-						href="http://www.dirigex.ma"
-						target="_blank"
-						className={css(classes.link)}
-						tabIndex="-1"
-					>
-					Dirigex
-					</a>
+					
 					<span> version {version}.</span>
 					{this.renderUser()}
 				</Container>

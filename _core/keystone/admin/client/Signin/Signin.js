@@ -102,7 +102,7 @@ var SigninView = React.createClass({
 				<div className={boxClassname}>
 					<h1 className="u-hidden-visually">{this.props.brand ? this.props.brand : 'Keystone'} Sign In </h1>
 					<div className="auth-box__inner">
-						<h2 style={{margin : '20px'}}>COREX <span style={{fontSize: '16px'}}> / Core for Express Robust backoffice and apps</span></h2>
+						<h2 style={{margin : '20px'}}>Keystone <span style={{fontSize: '16px'}}> / Mysql Support</span></h2>
 						<hr/>
 						{this.props.user ? (
 							<UserInfo

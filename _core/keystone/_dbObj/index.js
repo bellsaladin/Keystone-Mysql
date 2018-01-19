@@ -26,7 +26,9 @@ dbObj.prototype.Schema = require('./schema.js');
 dbObj.prototype.model = require('./model.js');
 
 dbObj.prototype.path = function (path, options) {
+	console.log('DbObj::path');
 	console.log(path)
+	console.log(options);
 };
 
 dbObj.prototype.connect = function (){
@@ -37,7 +39,7 @@ dbObj.prototype.connect = function (){
 	    this.connection.emit('open');
 	  })
 	  .catch(err => {
-	    console.error('Unable to connect to the database:', err);
+	    console.error('Unable to connect to the database : ', err);
 	    this.connection.emit('error', err);
 	  });
 };
