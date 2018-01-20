@@ -27,11 +27,38 @@ var Model  = function (key, schema) {
 		query.exec = function(callback){
 			self.sequelizeModel.findOne({
 			  where: self.where,
+			  //attributes: ['id', [self.attributes]],
+			  // FIXME : test only
 			  attributes: self.attributes,
+			  raw: true,
 			}).then(object => {
 				console.log('SequelizeModel::then')
 				console.log(object)
-				object._ = object;
+				// FIXME : sould be put somewhere to be more generic
+				if('password' in object){
+
+					console.log('Password.prototype.compare 1')
+					/* FIXME : This part should be placed somewhere, where primitive values would be convert to special prototype object with some extra logic like 'compare' in Password Type */
+					function Password(v) {
+					  this.value = v;
+					}
+					/* returns primitive value of an object */
+					Password.prototype.valueOf = function() {
+						console.log('Password.prototype.valueOf')
+					  return this.value;
+					}
+
+					Password.prototype.compare = function(compareVal, callback) {
+						console.log('Password.prototype.compare');
+						var isMatch = (this.value != compareVal)?true:false;
+						var err = null; // error should be thrown if null;
+					  	callback ( null, isMatch);
+					}
+
+					object._ = {};
+					object._.password = new Password(object.password)
+				}
+
 				callback(null, object);
 			}).catch(function (err) {
 				console.log('SequelizeModel::catch');
@@ -44,6 +71,62 @@ var Model  = function (key, schema) {
 		return query;
 
 	}
+
+	model.findOneById = function (id, attributes, callback) {
+		var self = this;
+		console.log('DbObj::model::findOne');
+		console.log(where);
+		console.log(attributes);
+		this.where = (where != null)? Utils.normalizeWhere(where) : null;
+		this.attributes = (attributes != null)? attributes.split(" ") : null; // mongoose params are passes as str with attributes splited by a space
+		var query = {};
+
+		query.exec = function(callback){
+			self.sequelizeModel.findOne({
+			  where: { id: id },
+			  //attributes: ['id', [self.attributes]],
+			  // FIXME : test only
+			  attributes: self.attributes,
+			  raw: true,
+			}).then(object => {
+				console.log('SequelizeModel::then')
+				console.log(object)
+				// FIXME : sould be put somewhere to be more generic
+				if('password' in object){
+
+					console.log('Password.prototype.compare 1')
+					/* FIXME : This part should be placed somewhere, where primitive values would be convert to special prototype object with some extra logic like 'compare' in Password Type */
+					function Password(v) {
+					  this.value = v;
+					}
+					/* returns primitive value of an object */
+					Password.prototype.valueOf = function() {
+						console.log('Password.prototype.valueOf')
+					  return this.value;
+					}
+
+					Password.prototype.compare = function(compareVal, callback) {
+						console.log('Password.prototype.compare');
+						var isMatch = (this.value != compareVal)?true:false;
+						var err = null; // error should be thrown if null;
+					  	callback ( null, isMatch);
+					}
+
+					object._ = {};
+					object._.password = new Password(object.password)
+				}
+
+				callback(null, object);
+			}).catch(function (err) {
+				console.log('SequelizeModel::catch');
+				console.log(err)
+				callback(err, null);
+			});
+		};
+
+		if(callback != null) query.exec();
+		return query;
+	};
 
 	//this.models[key] = model;
 

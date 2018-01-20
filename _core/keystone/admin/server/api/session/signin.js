@@ -12,6 +12,8 @@ function signin (req, res) {
 	var User = keystone.list(keystone.get('user model'));
 	//var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
 	User.model.findOne({ email: req.body.email.trim() }).exec(function (err, user) {
+		console.log('useruseruseruser')
+		console.log(user._)
 		if (user) {
 			keystone.callHook(user, 'pre:signin', req, function (err) {
 				if (err) return res.status(500).json({ error: 'pre:signin error', detail: err });
