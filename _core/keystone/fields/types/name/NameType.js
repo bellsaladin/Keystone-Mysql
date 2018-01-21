@@ -99,6 +99,9 @@ name.prototype.addFilterToQuery = function (filter) {
  */
 
 name.prototype.format = function (item) {
+	console.log('name.prototype.format');
+	console.log(item);
+	console.log(this.paths.full);
 	return item.get(this.paths.full);
 };
 

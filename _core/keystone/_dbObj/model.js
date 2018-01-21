@@ -72,12 +72,10 @@ var Model  = function (key, schema) {
 
 	}
 
-	model.findOneById = function (id, attributes, callback) {
+	model.findById = function (id, attributes, callback) {
 		var self = this;
 		console.log('DbObj::model::findOne');
-		console.log(where);
 		console.log(attributes);
-		this.where = (where != null)? Utils.normalizeWhere(where) : null;
 		this.attributes = (attributes != null)? attributes.split(" ") : null; // mongoose params are passes as str with attributes splited by a space
 		var query = {};
 
@@ -107,11 +105,18 @@ var Model  = function (key, schema) {
 
 					Password.prototype.compare = function(compareVal, callback) {
 						console.log('Password.prototype.compare');
+						// FIXME : implement here hash logic
 						var isMatch = (this.value != compareVal)?true:false;
-						var err = null; // error should be thrown if null;
-					  	callback ( null, isMatch);
+						var err = false; // error should be thrown if null;
+					  	callback (err, isMatch);
 					}
-
+					object.get = function(path){
+						console.log('object.get (mongoose get function)');
+						console.log('path');
+						if(path in object)
+							return object[path];
+						return '[DBObj:Object Unknow value for path "' + path + '" ]';
+					}
 					object._ = {};
 					object._.password = new Password(object.password)
 				}
